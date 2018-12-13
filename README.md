@@ -1,2 +1,2 @@
 # TemperatureFirebase
-A simple package for MagicMirror to read temperature from Friebase
+A simple package MagicMirror to read temperature from Friebase
