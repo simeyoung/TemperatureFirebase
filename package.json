@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "firebase": "^5.7.0"
+  },
+  "name": "temperature-firebase",
+  "version": "1.0.0",
+  "description": "A simple package MagicMirror to read temperature from Friebase",
+  "main": "node_helper.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simeyoung/TemperatureFirebase.git"
+  },
+  "author": "Sime Young srl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simeyoung/TemperatureFirebase/issues"
+  },
+  "homepage": "https://github.com/simeyoung/TemperatureFirebase#readme"
+}
