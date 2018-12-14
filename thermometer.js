@@ -49,6 +49,8 @@ Module.register('thermometer', {
 			this.config.projectId);
 
 		this.fetch(this.config.roomId, this.onFetchTemperature);
+
+		Log.info('continue load module thermometer..');
 	},
 
 	configure: function (apiKey, authDomain, databaseURL, projectId) {
@@ -61,12 +63,16 @@ Module.register('thermometer', {
             projectId: projectId
         };
 
-        firebase.initializeApp(config);
+		firebase.initializeApp(config);
+		
+		Log.info('Configured firebase!');
     },
 
     fetch: function (idRoom, callback) {
         var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
-        temperatureRef.once('child_added', callback);
+		temperatureRef.once('child_added', callback);
+		
+		Log.info('Configured fetch for firebase..');
     },
 
 	// Get dom
