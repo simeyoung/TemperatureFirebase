@@ -56,6 +56,7 @@ Module.register('thermometer', {
 	},
 
 	configureFirebase: function () {
+		Log.info('configuring firebase...');
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = {
             apiKey: this.config.apiKey,
