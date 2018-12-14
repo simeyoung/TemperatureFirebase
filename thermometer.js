@@ -33,22 +33,6 @@ Module.register('thermometer', {
 		// Log.info('Starting module: ' + this.name + ' from module');
 	},
 
-	configureFirebase: function () {
-		Log.info('configuring firebase...');
-		// See https://firebase.google.com/docs/web/setup#project_setup for setup
-		this.firebaseConfig = {
-			apiKey: this.config.apiKey,
-			authDomain: this.config.authDomain,
-			databaseURL: this.config.databaseURL,
-			projectId: this.config.projectId
-		};
-
-		this.fetch(this.config.roomId, this.onFetchTemperature);
-
-		Log.info('api key: ' + this.config.apiKey);
-		Log.info('Configured firebase!');
-	},
-
 	socketNotificationReceived: function (notification, payload) {
 		console.log(this.name + ': Received socketnotification: ' + notification);
 
@@ -63,9 +47,10 @@ Module.register('thermometer', {
 	getDom: function () {
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
-		wrapper.classList.add('container');
-		wrapper.innerHTML = this.createCard('temp', 'temperature', this.temperature.degrees, 'gradi').trim() +
-			this.createCard('energy', 'umidità', this.temperature.humidity, '%').trim();
+		wrapper.innerHTML = JSON.stringify(this.temperature);
+		// wrapper.classList.add('container');
+		// wrapper.innerHTML = this.createCard('temp', 'temperature', this.temperature.degrees, 'gradi').trim() +
+		// 	this.createCard('energy', 'umidità', this.temperature.humidity, '%').trim();
 		return wrapper;
 	},
 

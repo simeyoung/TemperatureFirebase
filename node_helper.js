@@ -33,16 +33,16 @@ module.exports = NodeHelper.create({
 
         this.fetch(config.roomId, this.onFetchTemperature);
 
-        Log.info('api key: ' + this.config.apiKey);
+        Log.info('api key: ' + config.apiKey);
         Log.info('Configured firebase!');
     },
 
-    fetch: function (idRoom, callback) {
+    fetch: function (roomId, callback) {
 		this.openFirebaseConnection(this.firebaseConfig);
 
 		const database = firebase.database();
-        const temperatureRef = database.ref('rooms/' + idRoom + '/temperatures');
-		temperatureRef.once('child_added', callback);
+        const temperatureRef = database.ref('rooms/' + roomId + '/temperatures');
+		temperatureRef.once('child_changed', callback);
 		
 		Log.info('Configured fetch for firebase..');
     },

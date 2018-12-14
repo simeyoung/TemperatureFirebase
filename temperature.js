@@ -30,7 +30,7 @@ function thermometer() {
 
     this.fetch = function (idRoom, callback) {
         var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
-        return temperatureRef.once('child_added', callback);
+        return temperatureRef.once('child_changed', callback);
     }
 };
 
