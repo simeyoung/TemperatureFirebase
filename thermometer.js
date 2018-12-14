@@ -9,7 +9,7 @@
 
 const thermometer = require('./temperature');
 
-Module.register('thermostat', {
+Module.register('thermometer', {
 	defaults: {
 		roomId: 2,
 		apiKey: '',
