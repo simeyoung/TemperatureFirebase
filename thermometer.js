@@ -55,18 +55,18 @@ Module.register('thermometer', {
 		// Log.info('continue load module thermometer..');
 	},
 
-	configureFirebase: function (apiKey, authDomain, databaseURL, projectId) {
-        // See https://firebase.google.com/docs/web/setup#project_setup for how to
-        // auto-generate this config
+	configureFirebase: function () {
+        // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = {
-            apiKey: apiKey,
-            authDomain: authDomain,
-            databaseURL: databaseURL,
-            projectId: projectId
-        };
+            apiKey: this.config.apiKey,
+            authDomain: this.config.authDomain,
+            databaseURL: this.config.databaseURL,
+            projectId: projethis.config.projectId
+		};
 
-		// firebase.initializeApp(config);
-		
+		this.fetch(this.config.roomId, this.onFetchTemperature);
+
+		Log.info('api key: ' + this.config.apiKey);
 		Log.info('Configured firebase!');
     },
 
