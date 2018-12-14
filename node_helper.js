@@ -29,9 +29,18 @@ module.exports = NodeHelper.create({
     configureFirebase: function (config) {
         Log.info('configuring firebase...');
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
-        this.firebaseConfig = config.firebaseConfig;
+        // this.firebaseConfig = config.firebaseConfig;
 
-        this.fetch(config.roomId, this.onFetchTemperature);
+        var i = 0;
+        var sefl = this;
+        while (true) {
+            setTimeout(function() {
+                sefl.sendSocketNotification("TEMPERATURE", i);
+                i++;
+            }, 3000)
+        }
+
+        // this.fetch(config.roomId, this.onFetchTemperature);
 
         Log.info('api key: ' + config.apiKey);
         Log.info('Configured firebase!');
