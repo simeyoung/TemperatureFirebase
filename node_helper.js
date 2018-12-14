@@ -6,8 +6,8 @@
  */
 
 
-var NodeHelper = require('node_helper');
-var thermometer = require('./temperature.js');
+const NodeHelper = require('node_helper');
+const thermometer = require('./temperature');
 
 module.exports = NodeHelper.create({
 	// Subclass start method.

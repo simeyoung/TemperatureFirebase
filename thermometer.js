@@ -17,9 +17,9 @@ Module.register('thermostat', {
 	},
 
 	// Define scripts
-	getScripts: function () {
-		return ['temperature.js'];
-	},
+	// getScripts: function () {
+	// 	return ['temperature.js'];
+	// },
 
 	// Define styles
 	getStyles: function () {
