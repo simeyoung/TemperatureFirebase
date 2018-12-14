@@ -28,69 +28,39 @@ Module.register('thermometer', {
 		return ['style.css'];
 	},
 
-	// Define required translations.
-	getTranslations: function () {
-		return {
-			// en: 'translations/en.json',
-			// de: 'translations/de.json',
-			// nl: 'translations/nl.json',
-		};
-	},
-
 	// Define start sequence.
 	start: function () {
 		// Log.info('Starting module: ' + this.name + ' from module');
-		// Log.info('ciao');
-
-
-		// const therm = new thermometer();
-		// this.configureFirebase(this.config.apiKey,
-		// 	this.config.authDomain,
-		// 	this.config.databaseURL,
-		// 	this.config.projectId);
-
-		// this.fetch(this.config.roomId, this.onFetchTemperature);
-
-		// Log.info('api key: ' + this.config.apiKey);
-		// Log.info('continue load module thermometer..');
 	},
 
 	configureFirebase: function () {
 		Log.info('configuring firebase...');
-        // See https://firebase.google.com/docs/web/setup#project_setup for setup
-        this.firebaseConfig = {
-            apiKey: this.config.apiKey,
-            authDomain: this.config.authDomain,
-            databaseURL: this.config.databaseURL,
-            projectId: this.config.projectId
+		// See https://firebase.google.com/docs/web/setup#project_setup for setup
+		this.firebaseConfig = {
+			apiKey: this.config.apiKey,
+			authDomain: this.config.authDomain,
+			databaseURL: this.config.databaseURL,
+			projectId: this.config.projectId
 		};
 
 		this.fetch(this.config.roomId, this.onFetchTemperature);
 
 		Log.info('api key: ' + this.config.apiKey);
 		Log.info('Configured firebase!');
-    },
-
-    fetch: function (idRoom, callback) {
-		this.openFirebaseConnection(this.firebaseConfig);
-
-		const database = firebase.database();
-        const temperatureRef = database.ref('rooms/' + idRoom + '/temperatures');
-		temperatureRef.once('child_added', callback);
-		
-		Log.info('Configured fetch for firebase..');
 	},
 
-    socketNotificationReceived: function (notification, payload) {
-        console.log(this.name + ': Received socketnotification: ' + notification);
-        if (notification == 'ONLOAD') {
-			this.configureFirebase();
-        }
-    },
+	socketNotificationReceived: function (notification, payload) {
+		console.log(this.name + ': Received socketnotification: ' + notification);
+
+		switch (notification) {
+			case 'TEMPERATURE':
+				this.receiveTemperature(payload)
+				break;
+		}
+	},
 
 	// Get dom
 	getDom: function () {
-		// this.configureFirebase();
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
 		wrapper.classList.add('container');
@@ -99,8 +69,8 @@ Module.register('thermometer', {
 		return wrapper;
 	},
 
-	loaded: function(callback) {
-		this.configureFirebase();
+	loaded: function (callback) {
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		this.finishLoading();
 		Log.log(this.name + ' is loaded!');
 		callback();
@@ -108,17 +78,11 @@ Module.register('thermometer', {
 
 	// Funzione che ottiene relatime
 	// la nuova temperatura
-	onFetchTemperature: function (temperature) {
+	receiveTemperature: function (temperature) {
 		Log.info('Firebase realtime database added: ' + JSON.stringify(value));
 		this.temperature = temperature;
 		this.updateDom();
 	},
-
-    openFirebaseConnection: function (firebaseConfig) {
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-    },
 
 	createCard: function (clss, txt, num, measure) {
 		return `<div class='card ${clss}'>

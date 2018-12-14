@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "electron-rebuild": "^1.8.2",
     "firebase": "^5.7.0"
   },
   "name": "temperature-firebase",
