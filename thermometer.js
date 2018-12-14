@@ -58,13 +58,12 @@ Module.register('thermometer', {
 
 		var i = 0;
         var sefl = this;
-        while (true) {
-            setTimeout(function() {
-                // sefl.sendSocketNotification("TEMPERATURE", i);
-				this.temperature = i++;
-				this.updateDom();
-            }, 3000)
-        }
+		for (var k = 0; k < 9999; k++) {
+			setInterval(function() {
+			  this.temperature = i++;
+			  this.updateDom();
+			}, 3000);
+		}
 
 
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
