@@ -14,6 +14,16 @@ module.exports = NodeHelper.create({
 	start: function() {
         console.log('Starting module: ' + this.name + ' from helper');
         this.loaded = false;
+
+        this.configureFirebase(this.config.apiKey,
+			this.config.authDomain,
+			this.config.databaseURL,
+			this.config.projectId);
+
+		this.fetch(this.config.roomId, this.onFetchTemperature);
+
+		Log.info('api key: ' + this.config.apiKey);
+		Log.info('continue load module thermometer..');
         
 		// Listen firebase database
 		// this.therm = new thermometer();

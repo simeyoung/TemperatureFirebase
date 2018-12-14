@@ -39,20 +39,20 @@ Module.register('thermometer', {
 
 	// Define start sequence.
 	start: function () {
-		Log.info('Starting module: ' + this.name + ' from module');
-		Log.info('ciao');
+		// Log.info('Starting module: ' + this.name + ' from module');
+		// Log.info('ciao');
 
 
 		// const therm = new thermometer();
-		this.configureFirebase(this.config.apiKey,
-			this.config.authDomain,
-			this.config.databaseURL,
-			this.config.projectId);
+		// this.configureFirebase(this.config.apiKey,
+		// 	this.config.authDomain,
+		// 	this.config.databaseURL,
+		// 	this.config.projectId);
 
 		// this.fetch(this.config.roomId, this.onFetchTemperature);
 
-		Log.info('api key: ' + this.config.apiKey);
-		Log.info('continue load module thermometer..');
+		// Log.info('api key: ' + this.config.apiKey);
+		// Log.info('continue load module thermometer..');
 	},
 
 	configureFirebase: function (apiKey, authDomain, databaseURL, projectId) {
