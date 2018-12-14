@@ -41,11 +41,19 @@ function thermometer() {
 
         var recentPostsRef = temperatureRef.limitToLast(1);
         recentPostsRef.on('child_added', function (snapshot) {
-            // console.log(value);
+            var numberChild = snapshot.numChildren();
+            var obj = {},
+                i = 0;
+
             snapshot.forEach(function (childSnapshot) {
+                i++;
                 var childKey = childSnapshot.key;
                 var childData = childSnapshot.val();
-                console.log(childData);
+                obj[childKey] = childData;
+                if (i == numberChild) {
+                    console.log(obj);
+                    return;
+                }
             });
         })
 
