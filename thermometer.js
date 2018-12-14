@@ -48,7 +48,7 @@ Module.register('thermometer', {
 			this.config.databaseURL,
 			this.config.projectId);
 
-		this.fetch(this.config.roomId, this.onFetchTemperature);
+		// this.fetch(this.config.roomId, this.onFetchTemperature);
 
 		Log.info('continue load module thermometer..');
 	},
