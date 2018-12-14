@@ -56,14 +56,20 @@ Module.register('thermometer', {
 
 	loaded: function (callback) {
 
-		var i = 0;
-        var sefl = this;
-		for (var k = 0; k < 9999; k++) {
-			setInterval(function() {
-			  this.temperature = i++;
-			  this.updateDom();
-			}, 3000);
-		}
+		// var i = 0;
+		// var sefl = this;
+		// for (var k = 0; k < 9999; k++) {
+		// 	setInterval(function() {
+		// 	  this.temperature = i++;
+		// 	  this.updateDom();
+		// 	}, 3000);
+		// }
+
+
+		setInterval(function () {
+			this.temperature = "puppa";
+			this.updateDom();
+		}, 5000);
 
 
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
@@ -93,6 +99,6 @@ Module.register('thermometer', {
 				 </div>`;
 	},
 
-	temperature: {}
+	temperature: ""
 
 });
