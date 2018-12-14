@@ -7,8 +7,6 @@
  * MIT Licensed.
  */
 
-// const thermometer = require('./temperature');
-
 Module.register('thermometer', {
 	defaults: {
 		roomId: 2,
@@ -19,9 +17,11 @@ Module.register('thermometer', {
 	},
 
 	// Define scripts
-	// getScripts: function () {
-	// 	return ['temperature.js'];
-	// },
+	getScripts: function () {
+		return [
+			this.file('node_modules/firebase/firebase.js')
+		];
+	},
 
 	// Define styles
 	getStyles: function () {
