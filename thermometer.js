@@ -7,7 +7,7 @@
  * MIT Licensed.
  */
 
-const thermometer = require('./temperature');
+// const thermometer = require('./temperature');
 
 Module.register('thermometer', {
 	defaults: {
@@ -42,13 +42,13 @@ Module.register('thermometer', {
 		Log.info('Starting module: ' + this.name);
 
 
-		const therm = new thermometer();
-		therm.configure(this.config.apiKey,
+		// const therm = new thermometer();
+		this.therm.configure(this.config.apiKey,
 			this.config.authDomain,
 			this.config.databaseURL,
 			this.config.projectId);
 
-		therm.fetch(this.config.roomId, this.onFetchTemperature);
+		this.therm.fetch(this.config.roomId, this.onFetchTemperature);
 	},
 
 	// Get dom
