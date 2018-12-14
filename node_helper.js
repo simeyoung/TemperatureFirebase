@@ -5,6 +5,8 @@
  * MIT Licensed.
  */
 
+
+var NodeHelper = require('node_helper');
 var thermometer = require('./temperature.js');
 
 module.exports = NodeHelper.create({
