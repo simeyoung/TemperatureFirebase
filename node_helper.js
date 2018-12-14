@@ -6,15 +6,16 @@
  */
 
 
-const NodeHelper = require('node_helper');
+var NodeHelper = require("node_helper");
 // const thermometer = require('./temperature');
 
 module.exports = NodeHelper.create({
 	// Subclass start method.
-	// start: function() {
-    //     console.log('Starting module: ' + this.name);
+	start: function() {
+        console.log('Starting module: ' + this.name);
+        this.loaded = false;
         
-	// 	// Listen firebase database
-	// 	// this.therm = new thermometer();
-	// }
+		// Listen firebase database
+		// this.therm = new thermometer();
+	}
 });
