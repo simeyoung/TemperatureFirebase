@@ -40,6 +40,7 @@ Module.register('thermometer', {
 	// Define start sequence.
 	start: function () {
 		Log.info('Starting module: ' + this.name);
+		Log.info('ciao');
 
 
 		// const therm = new thermometer();
