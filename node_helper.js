@@ -42,7 +42,17 @@ module.exports = NodeHelper.create({
 
 		const database = firebase.database();
         const temperatureRef = database.ref('rooms/' + roomId + '/temperatures');
-		temperatureRef.once('child_changed', callback);
+        // temperatureRef.once('child_changed', callback);
+        
+        var recentPostsRef = temperatureRef.limitToLast(1);
+        recentPostsRef.on('child_added', function (snapshot) {
+            // console.log(value);
+            snapshot.forEach(function (childSnapshot) {
+                // var childKey = childSnapshot.key;
+                var childData = childSnapshot.val();
+                callback(childData);
+            });
+        })
 		
 		Log.info('Configured fetch for firebase..');
     },

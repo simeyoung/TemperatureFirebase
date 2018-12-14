@@ -30,7 +30,25 @@ function thermometer() {
 
     this.fetch = function (idRoom, callback) {
         var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
-        return temperatureRef.once('child_changed', callback);
+        // return temperatureRef.once('child_changed', callback);
+        // temperatureRef.once('value', (snapshot) => {
+        //     snapshot.forEach(function (childSnapshot) {
+        //         var childKey = childSnapshot.key;
+        //         var childData = childSnapshot.val();
+        //         console.log(childData);
+        //     });
+        // });
+
+        var recentPostsRef = temperatureRef.limitToLast(1);
+        recentPostsRef.on('child_added', function (snapshot) {
+            // console.log(value);
+            snapshot.forEach(function (childSnapshot) {
+                var childKey = childSnapshot.key;
+                var childData = childSnapshot.val();
+                console.log(childData);
+            });
+        })
+
     }
 };
 
