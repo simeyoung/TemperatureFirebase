@@ -89,12 +89,20 @@ Module.register('thermometer', {
 
 	// Get dom
 	getDom: function () {
+		// this.configureFirebase();
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
 		wrapper.classList.add('container');
 		wrapper.innerHTML = this.createCard('temp', 'temperature', this.temperature.degrees, 'gradi').trim() +
 			this.createCard('energy', 'umidità', this.temperature.humidity, '%').trim();
 		return wrapper;
+	},
+
+	loaded: function(callback) {
+		this.configureFirebase();
+		this.finishLoading();
+		Log.log(this.name + ' is loaded!');
+		callback();
 	},
 
 	// Funzione che ottiene relatime

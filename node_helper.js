@@ -15,7 +15,7 @@ module.exports = NodeHelper.create({
         console.log('Starting module: ' + this.name + ' from helper');
         this.loaded = false;
 
-        this.sendSocketNotification('ONLOAD', {});
+        // this.sendSocketNotification('ONLOAD', {});
 		// Listen firebase database
 		// this.therm = new thermometer();
 	}
