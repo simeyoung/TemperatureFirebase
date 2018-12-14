@@ -66,7 +66,7 @@ Module.register('thermometer', {
 
     fetch: function (idRoom, callback) {
         var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
-        return temperatureRef.once('child_added', callback);
+        temperatureRef.once('child_added', callback);
     },
 
 	// Get dom
