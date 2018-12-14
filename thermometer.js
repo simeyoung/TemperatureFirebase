@@ -43,33 +43,37 @@ Module.register('thermometer', {
 
 
 		// const therm = new thermometer();
-		this.configure(this.config.apiKey,
+		this.configureFirebase(this.config.apiKey,
 			this.config.authDomain,
 			this.config.databaseURL,
 			this.config.projectId);
 
 		// this.fetch(this.config.roomId, this.onFetchTemperature);
 
+		Log.info('api key: ' + this.config.apiKey);
 		Log.info('continue load module thermometer..');
 	},
 
-	configure: function (apiKey, authDomain, databaseURL, projectId) {
+	configureFirebase: function (apiKey, authDomain, databaseURL, projectId) {
         // See https://firebase.google.com/docs/web/setup#project_setup for how to
         // auto-generate this config
-        const config = {
+        this.firebaseConfig = {
             apiKey: apiKey,
             authDomain: authDomain,
             databaseURL: databaseURL,
             projectId: projectId
         };
 
-		firebase.initializeApp(config);
+		// firebase.initializeApp(config);
 		
 		Log.info('Configured firebase!');
     },
 
     fetch: function (idRoom, callback) {
-        var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
+		this.openFirebaseConnection(this.firebaseConfig);
+
+		const database = firebase.database();
+        const temperatureRef = database.ref('rooms/' + idRoom + '/temperatures');
 		temperatureRef.once('child_added', callback);
 		
 		Log.info('Configured fetch for firebase..');
@@ -92,6 +96,12 @@ Module.register('thermometer', {
 		this.temperature = temperature;
 		this.updateDom();
 	},
+
+    openFirebaseConnection: function (firebaseConfig) {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+    },
 
 	createCard: function (clss, txt, num, measure) {
 		return `<div class='card ${clss}'>
