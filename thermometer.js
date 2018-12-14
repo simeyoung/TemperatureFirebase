@@ -39,15 +39,12 @@ Module.register('thermostat', {
 	start: function () {
 		Log.info('Starting module: ' + this.name);
 
-		// Listen firebase database
-		var therm = new thermometer();
-
-		therm.configure(this.config.apiKey,
+		this.therm.configure(this.config.apiKey,
 			this.config.authDomain,
 			this.config.databaseURL,
 			this.config.projectId);
 
-		therm.fetch(this.config.roomId, this.onFetchTemperature);
+		this.therm.fetch(this.config.roomId, this.onFetchTemperature);
 	},
 
 	// Get dom
