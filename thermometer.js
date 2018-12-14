@@ -61,7 +61,7 @@ Module.register('thermometer', {
             apiKey: this.config.apiKey,
             authDomain: this.config.authDomain,
             databaseURL: this.config.databaseURL,
-            projectId: projethis.config.projectId
+            projectId: this.config.projectId
 		};
 
 		this.fetch(this.config.roomId, this.onFetchTemperature);
@@ -78,6 +78,13 @@ Module.register('thermometer', {
 		temperatureRef.once('child_added', callback);
 		
 		Log.info('Configured fetch for firebase..');
+	},
+
+    socketNotificationReceived: function (notification, payload) {
+        console.log(this.name + ': Received socketnotification: ' + notification);
+        if (notification == 'ONLOAD') {
+			this.configureFirebase();
+        }
     },
 
 	// Get dom
