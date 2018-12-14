@@ -43,13 +43,31 @@ Module.register('thermometer', {
 
 
 		// const therm = new thermometer();
-		this.therm.configure(this.config.apiKey,
+		this.configure(this.config.apiKey,
 			this.config.authDomain,
 			this.config.databaseURL,
 			this.config.projectId);
 
-		this.therm.fetch(this.config.roomId, this.onFetchTemperature);
+		this.fetch(this.config.roomId, this.onFetchTemperature);
 	},
+
+	configure: function (apiKey, authDomain, databaseURL, projectId) {
+        // See https://firebase.google.com/docs/web/setup#project_setup for how to
+        // auto-generate this config
+        const config = {
+            apiKey: apiKey,
+            authDomain: authDomain,
+            databaseURL: databaseURL,
+            projectId: projectId
+        };
+
+        firebase.initializeApp(config);
+    },
+
+    fetch: function (idRoom, callback) {
+        var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
+        return temperatureRef.once('child_added', callback);
+    },
 
 	// Get dom
 	getDom: function () {
