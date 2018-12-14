@@ -65,11 +65,19 @@ Module.register('thermometer', {
 		// 	}, 3000);
 		// }
 
+		this.temperature = "puppa";
+		Log.info("ciao");
+		this.updateDom();
+
+
+		Log.info("loaded");
 
 		setInterval(function () {
-			this.temperature = "puppa";
+			this.temperature = "puppa da interval";
+			Log.info("ciao da interval");
 			this.updateDom();
 		}, 5000);
+
 
 
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
