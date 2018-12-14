@@ -39,7 +39,7 @@ Module.register('thermometer', {
 
 	// Define start sequence.
 	start: function () {
-		Log.info('Starting module: ' + this.name);
+		Log.info('Starting module: ' + this.name + ' from module');
 		Log.info('ciao');
 
 
