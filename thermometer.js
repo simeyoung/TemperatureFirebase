@@ -67,7 +67,7 @@ Module.register('thermometer', {
 
 		this.temperature = "puppa";
 		Log.info("ciao");
-		this.updateDom();
+		this.updateDom(100);
 
 
 		Log.info("loaded");
@@ -75,7 +75,7 @@ Module.register('thermometer', {
 		setInterval(function () {
 			this.temperature = "puppa da interval";
 			Log.info("ciao da interval");
-			this.updateDom();
+			this.updateDom(10000);
 		}, 5000);
 
 
