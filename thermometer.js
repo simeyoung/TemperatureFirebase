@@ -7,6 +7,8 @@
  * MIT Licensed.
  */
 
+const thermometer = require('./temperature');
+
 Module.register('thermostat', {
 	defaults: {
 		roomId: 2,
@@ -39,12 +41,14 @@ Module.register('thermostat', {
 	start: function () {
 		Log.info('Starting module: ' + this.name);
 
-		this.therm.configure(this.config.apiKey,
+
+		const therm = new thermometer();
+		therm.configure(this.config.apiKey,
 			this.config.authDomain,
 			this.config.databaseURL,
 			this.config.projectId);
 
-		this.therm.fetch(this.config.roomId, this.onFetchTemperature);
+		therm.fetch(this.config.roomId, this.onFetchTemperature);
 	},
 
 	// Get dom
