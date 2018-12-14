@@ -36,11 +36,11 @@ Module.register('thermometer', {
 	socketNotificationReceived: function (notification, payload) {
 		console.log(this.name + ': Received socketnotification: ' + notification);
 
-		switch (notification) {
-			case 'TEMPERATURE':
-				this.receiveTemperature(payload)
-				break;
-		}
+		// switch (notification) {
+		// 	case 'TEMPERATURE':
+		// 		this.receiveTemperature(payload)
+		// 		break;
+		// }
 	},
 
 	// Get dom
@@ -55,6 +55,18 @@ Module.register('thermometer', {
 	},
 
 	loaded: function (callback) {
+
+		var i = 0;
+        var sefl = this;
+        while (true) {
+            setTimeout(function() {
+                // sefl.sendSocketNotification("TEMPERATURE", i);
+				this.temperature = i++;
+				this.updateDom();
+            }, 3000)
+        }
+
+
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		this.finishLoading();
 		Log.log(this.name + ' is loaded!');
