@@ -10,10 +10,10 @@
 Module.register('thermostat', {
 	defaults: {
 		roomId: 2,
-		apiKey: apiKey,
-		authDomain: authDomain,
-		databaseURL: databaseURL,
-		projectId: projectId
+		apiKey: '',
+		authDomain: '',
+		databaseURL: '',
+		projectId: ''
 	},
 
 	// Define scripts
