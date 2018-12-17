@@ -44,9 +44,10 @@ module.exports = NodeHelper.create({
         // temperatureRef.once('child_changed', callback);
 
         var recentPostsRef = temperatureRef.limitToLast(1);
+        var self = this;
         recentPostsRef.on('child_added', function (snapshot) {
             console.log('on child added');
-            this.getTemperature(snapshot, callback);
+            self.getTemperature(snapshot, callback);
         })
 
         console.log('Configured fetch for firebase..');
