@@ -37,9 +37,6 @@ Module.register('thermometer', {
 		switch (notification) {
 			case "TEMPERATURE":
 				this.receiveTemperature(payload);
-				// var wrapper = document.getElementById('container');
-				// wrapper.innerHTML = this.createCard('temp', 'temperature', payload.degrees, 'gradi').trim() +
-				// 	this.createCard('energy', 'umidità', payload.humidity, '%').trim();
 				break;
 		}
 	},
@@ -51,9 +48,9 @@ Module.register('thermometer', {
 		var wrapper = document.createElement('div');
 		// wrapper.classList.add('container');
 		wrapper.setAttribute('id', 'container');
-		wrapper.innerHTML = JSON.stringify(this.temperature);
-		// wrapper.innerHTML = this.createCard('temp', 'temperature', this.temperature.degrees, 'gradi').trim() +
-		// 	this.createCard('energy', 'umidità', this.temperature.humidity, '%').trim();
+		// wrapper.innerHTML = JSON.stringify(this.temperature);
+		wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
+			this.createCard('energy', 'umidità', '0', '%').trim();
 		return wrapper;
 	},
 
@@ -70,7 +67,9 @@ Module.register('thermometer', {
 		this.temperature = temperature;
 		// this.updateDom();
 		var wrapper = document.getElementById('container');
-		wrapper.innerHTML = JSON.stringify(temperature);
+		// wrapper.innerHTML = JSON.stringify(temperature);
+		wrapper.innerHTML = this.createCard('temp', 'temperature', payload.degrees, 'gradi').trim() +
+			this.createCard('energy', 'umidità', payload.humidity, '%').trim();
 	},
 
 	createCard: function (clss, txt, num, measure) {
