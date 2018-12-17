@@ -64,8 +64,10 @@ module.exports = NodeHelper.create({
                 var childKey = childSnapshot.key;
                 var childData = childSnapshot.val();
                 obj[childKey] = childData;
-                if (i == numberChild)
+                if (i == numberChild) {
+                    console.log('temperature added', obj);
                     callback(obj);
+                }
             });
         });
     },
