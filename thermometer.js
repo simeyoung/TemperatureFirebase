@@ -78,11 +78,11 @@ Module.register('thermometer', {
 		var degrees = document.getElementById('degrees');
 		degrees.innerHTML = temperature.degrees + '°';
 		var roomName = document.getElementById('roomName');
-		roomName.innerHTML = temperature.roomName;
+		roomName.innerHTML = 'Stanza' + temperature.roomName;
 	},
 
 	createHTML: function (degrees, humidity, roomName) {
-		return `<h3 id="roomName">Stanza: ${roomName}</h3>
+		return `<h3 id="roomName">${roomName}</h3>
 				<div class="row">
 					<label class="font-bold">Temperatura</label>
 					<label id="degrees">${degrees}°</label>
