@@ -14,8 +14,8 @@ Module.register('thermometer', {
 		authDomain: '',
 		databaseURL: '',
 		projectId: '',
-		degrees,
-		humidity,
+		degrees: '0',
+		humidity: '0',
 		roomName: 'Sala Sime'
 	},
 
@@ -60,12 +60,12 @@ Module.register('thermometer', {
 		return wrapper;
 	},
 
-	// loaded: function (callback) {
-	// 	// Log.info("loaded");
-	// 	this.finishLoading();
-	// 	Log.log(this.name + ' is loaded!');
-	// 	callback();
-	// },
+	loaded: function (callback) {
+		// Log.info("loaded");
+		this.finishLoading();
+		Log.log(this.name + ' is loaded!');
+		callback();
+	},
 
 	// Funzione che ottiene relatime
 	// la nuova temperatura
