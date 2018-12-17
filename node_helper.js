@@ -21,11 +21,11 @@ module.exports = NodeHelper.create({
 
     },
 
-    onFetchTemperature: function (value) {
+    onFetchTemperature: function (value, self) {
         console.log('send temperature to module: thermostat');
         console.log('temperature sended: ', value);
         console.log('this current', this);
-        this.sendSocketNotification('TEMPERATURE', value);
+        self.sendSocketNotification('TEMPERATURE', value);
     },
 
     configureFirebase: function (config) {
@@ -49,13 +49,13 @@ module.exports = NodeHelper.create({
         var self = this;
         recentPostsRef.on('child_added', function (snapshot) {
             console.log('on child added');
-            self.getTemperature(snapshot, callback);
+            self.getTemperature(snapshot, callback, self);
         });
 
         console.log('Configured fetch for firebase..');
     },
 
-    getTemperature: function (snapshot, callback) {
+    getTemperature: function (snapshot, callback, self) {
         var numberChild = snapshot.numChildren();
         var obj = {},
             i = 0;
@@ -67,7 +67,7 @@ module.exports = NodeHelper.create({
             obj[childKey] = childData;
             if (i == numberChild) {
                 console.log('temperature added', obj);
-                callback(obj);
+                callback(obj, self);
             }
         });
     },
