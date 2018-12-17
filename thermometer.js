@@ -44,8 +44,6 @@ Module.register('thermometer', {
 	},
 
 	socketNotificationReceived: function (notification, payload) {
-		Log.info(this.name + ': Received socketnotification: ' + notification);
-
 		switch (notification) {
 			case "TEMPERATURE":
 				this.receiveTemperature(payload);
