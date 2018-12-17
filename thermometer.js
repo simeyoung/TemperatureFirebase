@@ -80,7 +80,7 @@ Module.register('thermometer', {
 			cards += this.createHTML(room.degrees, room.humidity, room.name);
 		}
 
-		wrapper.innerHTML = this.createHTML('0', '0', 'sala Sime');
+		wrapper.innerHTML = cards;
 	},
 
 	createHTML: function (degrees, humidity, roomName) {
