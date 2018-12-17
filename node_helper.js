@@ -25,6 +25,7 @@ module.exports = NodeHelper.create({
         console.log('send temperature to module: thermostat');
         console.log('temperature sended: ', value);
         self.sendSocketNotification('TEMPERATURE', value);
+        self.sendNotification('TEMPERATURE', value);
     },
 
     configureFirebase: function (config) {
