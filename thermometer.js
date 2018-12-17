@@ -46,7 +46,7 @@ Module.register('thermometer', {
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
-		// wrapper.classList.add('container');
+		wrapper.classList.add('container');
 		wrapper.setAttribute('id', 'container');
 		// wrapper.innerHTML = JSON.stringify(this.temperature);
 		wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
@@ -64,12 +64,10 @@ Module.register('thermometer', {
 	// Funzione che ottiene relatime
 	// la nuova temperatura
 	receiveTemperature: function (temperature) {
-		this.temperature = temperature;
-		// this.updateDom();
 		var wrapper = document.getElementById('container');
 		// wrapper.innerHTML = JSON.stringify(temperature);
-		wrapper.innerHTML = this.createCard('temp', 'temperature', payload.degrees, 'gradi').trim() +
-			this.createCard('energy', 'umidità', payload.humidity, '%').trim();
+		wrapper.innerHTML = this.createCard('temp', 'temperature', temperature.degrees, 'gradi').trim() +
+			this.createCard('energy', 'umidità', temperature.humidity, '%').trim();
 	},
 
 	createCard: function (clss, txt, num, measure) {
