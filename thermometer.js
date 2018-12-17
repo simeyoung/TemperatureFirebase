@@ -31,14 +31,14 @@ Module.register('thermometer', {
 		return ['style.css'];
 	},
 
-	getTemplate: function () {
-		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
-		return "thermometer.njk"
-	},
+	// getTemplate: function () {
+	// 	// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+	// 	return "thermometer.njk"
+	// },
 
-	getTemplateData: function () {
-		return this.config
-	},
+	// getTemplateData: function () {
+	// 	return this.config
+	// },
 
 	// Define start sequence.
 	start: function () {},
@@ -52,16 +52,13 @@ Module.register('thermometer', {
 	},
 
 	// Get dom
-	// getDom: function () {
-	// 	this.sendSocketNotification("FIREBASE_CONFIG", this.config);
-	// 	// 	// Crea div aggiungi classe container e card
-	// 	// 	var wrapper = document.createElement('div');
-	// 	// 	wrapper.classList.add('container');
-	// 	// 	wrapper.setAttribute('id', 'container');
-	// 	// 	wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
-	// 	// 		this.createCard('energy', 'umidità', '0', '%').trim();
-	// 	// 	return wrapper;
-	// },
+	getDom: function () {
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+		// Crea div aggiungi classe container e card
+		var wrapper = document.createElement('div');
+		wrapper.innerHTML = this.createHTML('0', '0');
+		return wrapper;
+	},
 
 	loaded: function (callback) {
 		// Log.info("loaded");
@@ -73,27 +70,20 @@ Module.register('thermometer', {
 	// Funzione che ottiene relatime
 	// la nuova temperatura
 	receiveTemperature: function (temperature) {
-		// var wrapper = document.getElementById('container');
-		// wrapper.innerHTML = JSON.stringify(temperature);
-		// wrapper.innerHTML = this.createCard('temp', 'temperature', temperature.degrees, 'gradi').trim() +
-		// 	this.createCard('energy', 'umidità', temperature.humidity, '%').trim();
 		var humidity = document.getElementById('humidity');
 		humidity.innerHTML = temperature.humidity + '%';
 		var degrees = document.getElementById('degrees');
 		degrees.innerHTML = temperature.degrees + '°';
 	},
 
-	createCard: function (clss, txt, num, measure) {
-		return `<div class='card ${clss}'>
-					 <div class='inner'>
-						<div class='icon'></div>
-						<div class='title'>
-							<div class='text'>${txt}</div>
-						</div>
-						<div class='number'>${num}</div>
-						<div class='measure'>${measure}</div>
-					 </div>
-				 </div>`;
+	createHTML: function (degrees, humidity) {
+		return `<h6>Stanza {{ roomName | safe }}<h6>
+				<dl>
+					<dt>Temperatura</dt>
+					<dd id="degrees" style="font-weight: bold">${degrees}°</dd>
+					<dt>Umidità</dt>
+					<dd id="humidity">${humidity}%</dd>
+				</dl>`;
 	},
 
 	temperature: ""
