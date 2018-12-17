@@ -45,6 +45,7 @@ Module.register('thermometer', {
 
 	// Get dom
 	getDom: function () {
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
 		// wrapper.classList.add('container');
@@ -58,7 +59,7 @@ Module.register('thermometer', {
 	loaded: function (callback) {
 		Log.info("loaded");
 
-		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+		// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		this.finishLoading();
 		Log.log(this.name + ' is loaded!');
 		callback();
