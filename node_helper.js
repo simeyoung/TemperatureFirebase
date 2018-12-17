@@ -81,6 +81,7 @@ module.exports = NodeHelper.create({
     socketNotificationReceived: function (notification, payload) {
         switch (notification) {
             case "FIREBASE_CONFIG":
+                console.log(payload);
                 this.configureFirebase(payload);
                 break;
         }
