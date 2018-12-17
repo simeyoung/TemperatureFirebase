@@ -29,8 +29,7 @@ module.exports = NodeHelper.create({
     configureFirebase: function (config) {
         console.log('configuring firebase...');
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
-        // this.firebaseConfig = config.firebaseConfig;
-
+        this.firebaseConfig = config.firebaseConfig;
         this.fetch(config.roomId, this.onFetchTemperature);
 
         console.log('api key: ' + config.apiKey);
@@ -81,7 +80,7 @@ module.exports = NodeHelper.create({
     socketNotificationReceived: function (notification, payload) {
         switch (notification) {
             case "FIREBASE_CONFIG":
-                console.log(payload);
+                console.log('firebase_config payload: ', payload);
                 this.configureFirebase(payload);
                 break;
         }
