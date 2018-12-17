@@ -14,6 +14,7 @@ module.exports = NodeHelper.create({
     // Subclass start method.
     start: function () {
         console.log('Starting module: ' + this.name + ' from helper');
+        this.sendSocketNotification('TEMPERATURE', value);
         this.loaded = false;
     },
 
