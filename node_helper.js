@@ -29,7 +29,7 @@ module.exports = NodeHelper.create({
     configureFirebase: function (config) {
         console.log('configuring firebase...');
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
-        this.firebaseConfig = config.firebaseConfig;
+        this.firebaseConfig = config;
         this.fetch(config.roomId, this.onFetchTemperature);
 
         console.log('api key: ' + config.apiKey);
