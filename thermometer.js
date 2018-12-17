@@ -27,9 +27,9 @@ Module.register('thermometer', {
 	},
 
 	// Define styles
-	getStyles: function () {
-		return ['style.css'];
-	},
+	// getStyles: function () {
+	// 	return ['style.css'];
+	// },
 
 	// getTemplate: function () {
 	// 	// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
@@ -60,12 +60,12 @@ Module.register('thermometer', {
 		return wrapper;
 	},
 
-	loaded: function (callback) {
-		// Log.info("loaded");
-		// this.finishLoading();
-		// Log.log(this.name + ' is loaded!');
-		// callback();
-	},
+	// loaded: function (callback) {
+	// 	// Log.info("loaded");
+	// 	this.finishLoading();
+	// 	Log.log(this.name + ' is loaded!');
+	// 	callback();
+	// },
 
 	// Funzione che ottiene relatime
 	// la nuova temperatura
