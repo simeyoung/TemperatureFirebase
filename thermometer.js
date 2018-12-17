@@ -48,7 +48,7 @@ Module.register('thermometer', {
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
 		// wrapper.classList.add('container');
-		wrapper.id = 'container';
+		wrapper.setAttribute('id', 'container');
 		wrapper.innerHTML = JSON.stringify(this.temperature);
 		// wrapper.innerHTML = this.createCard('temp', 'temperature', this.temperature.degrees, 'gradi').trim() +
 		// 	this.createCard('energy', 'umidità', this.temperature.humidity, '%').trim();

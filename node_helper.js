@@ -22,19 +22,19 @@ module.exports = NodeHelper.create({
     },
 
     onFetchTemperature: function (value) {
-        Log.info('send temperature to module:' + JSON.parse(value));
+        console.log('send temperature to module:' + JSON.parse(value));
         this.sendSocketNotification('TEMPERATURE', value);
     },
 
     configureFirebase: function (config) {
-        Log.info('configuring firebase...');
+        console.log('configuring firebase...');
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         // this.firebaseConfig = config.firebaseConfig;
 
         this.fetch(config.roomId, this.onFetchTemperature);
 
-        Log.info('api key: ' + config.apiKey);
-        Log.info('Configured firebase!');
+        console.log('api key: ' + config.apiKey);
+        console.log('Configured firebase!');
     },
 
     fetch: function (roomId, callback) {
@@ -46,11 +46,11 @@ module.exports = NodeHelper.create({
 
         var recentPostsRef = temperatureRef.limitToLast(1);
         recentPostsRef.on('child_added', function (snapshot) {
-            // console.log(value);
+            console.log('on child added');
             this.getTemperature(snapshot, callback);
         })
 
-        Log.info('Configured fetch for firebase..');
+        console.log('Configured fetch for firebase..');
     },
 
     getTemperature: function (snapshot, callback) {
