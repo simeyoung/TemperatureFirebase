@@ -84,6 +84,7 @@ module.exports = NodeHelper.create({
             case "FIREBASE_CONFIG":
                 console.log('firebase_config payload: ', payload);
                 this.sendSocketNotification("TEMPERATURE", "ciao");
+                console.log('socket notification sended');
                 // this.configureFirebase(payload);
                 break;
         }

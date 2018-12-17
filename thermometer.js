@@ -34,11 +34,12 @@ Module.register('thermometer', {
 	},
 
 	notificationReceived: function(notification, payload, sender) { 
-		Log.info(this.name + ': Received notification: ' + notification);
-
+		// Log.info(this.name + ': Received notification: ' + notification);
 		switch (notification) {
 			case "TEMPERATURE":
-				this.receiveTemperature(payload);
+				// this.receiveTemperature(payload);
+				var wrapper = document.getElementById('container');
+				wrapper.innerHTML = JSON.stringify(payload);
 				break;
 		}
 	},
@@ -46,7 +47,9 @@ Module.register('thermometer', {
 	socketNotificationReceived: function (notification, payload) {
 		switch (notification) {
 			case "TEMPERATURE":
-				this.receiveTemperature(payload);
+				// this.receiveTemperature(payload);
+				var wrapper = document.getElementById('container');
+				wrapper.innerHTML = JSON.stringify(payload);
 				break;
 		}
 	},
@@ -66,8 +69,6 @@ Module.register('thermometer', {
 
 	loaded: function (callback) {
 		Log.info("loaded");
-
-		// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		this.finishLoading();
 		Log.log(this.name + ' is loaded!');
 		callback();
