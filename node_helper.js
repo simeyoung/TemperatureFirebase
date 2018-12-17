@@ -33,13 +33,13 @@ module.exports = NodeHelper.create({
         // this.sendSocketNotification("TEMPERATURE", "ciao");
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = config;
-        this.fetch(config.roomId, this.onFetchTemperature);
+        this.fetch(config.roomId, this.onFetchTemperature, this);
 
         console.log('api key: ' + config.apiKey);
         console.log('Configured firebase!');
     },
 
-    fetch: function (roomId, callback) {
+    fetch: function (roomId, callback, self) {
         this.openFirebaseConnection(this.firebaseConfig);
 
         const database = firebase.database();
@@ -47,7 +47,6 @@ module.exports = NodeHelper.create({
         // temperatureRef.once('child_changed', callback);
 
         var recentPostsRef = temperatureRef.limitToLast(1);
-        var self = this;
         recentPostsRef.on('child_added', function (snapshot) {
             console.log('on child added');
             self.getTemperature(snapshot, callback, self);
