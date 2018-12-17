@@ -54,21 +54,19 @@ module.exports = NodeHelper.create({
     },
 
     getTemperature: function (snapshot, callback) {
-        snapshot.forEach(function (childSnapshot) {
-            var numberChild = childSnapshot.numChildren();
-            var obj = {},
-                i = 0;
+        var numberChild = snapshot.numChildren();
+        var obj = {},
+            i = 0;
 
-            snapshot.forEach(function (childSnapshot) {
-                i++;
-                var childKey = childSnapshot.key;
-                var childData = childSnapshot.val();
-                obj[childKey] = childData;
-                if (i == numberChild) {
-                    console.log('temperature added', obj);
-                    callback(obj);
-                }
-            });
+        snapshot.forEach(function (childSnapshot) {
+            i++;
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+            obj[childKey] = childData;
+            if (i == numberChild) {
+                console.log('temperature added', obj);
+                callback(obj);
+            }
         });
     },
 
