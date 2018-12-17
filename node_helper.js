@@ -14,7 +14,6 @@ module.exports = NodeHelper.create({
     // Subclass start method.
     start: function () {
         console.log('Starting module: ' + this.name + ' from helper');
-        this.sendSocketNotification("TEMPERATURE", "ciao");
         this.loaded = false;
     },
 
@@ -84,7 +83,8 @@ module.exports = NodeHelper.create({
         switch (notification) {
             case "FIREBASE_CONFIG":
                 console.log('firebase_config payload: ', payload);
-                this.configureFirebase(payload);
+                this.sendSocketNotification("TEMPERATURE", "ciao");
+                // this.configureFirebase(payload);
                 break;
         }
     }
