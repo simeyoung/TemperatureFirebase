@@ -25,13 +25,13 @@ module.exports = NodeHelper.create({
     onFetchTemperature: function (value, self) {
         console.log('send temperature to module: thermostat');
         console.log('temperature sended: ', value);
-        self.sendSocketNotification('TEMPERATURE', value);
-        self.sendNotification('TEMPERATURE', value);
+        // self.sendSocketNotification('TEMPERATURE', value);
+        // self.sendNotification('TEMPERATURE', value);
     },
 
     configureFirebase: function (config) {
         console.log('configuring firebase...');
-        this.sendSocketNotification("TEMPERATURE", "ciao");
+        // this.sendSocketNotification("TEMPERATURE", "ciao");
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = config;
         this.fetch(config.roomId, this.onFetchTemperature);
