@@ -48,14 +48,15 @@ Module.register('thermometer', {
 			case "TEMPERATURE":
 				this.receiveTemperature(payload);
 				break;
-			case "GET_FIREBASE_CONFIG":
-				this.sendSocketNotification("FIREBASE_CONFIG", this.config);
-				break;
+			// case "GET_FIREBASE_CONFIG":
+			// 	this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+			// 	break;
 		}
 	},
 
 	// Get dom
 	getDom: function () {
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
 		wrapper.innerHTML = this.createHTML('0', '0');
