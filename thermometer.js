@@ -36,9 +36,10 @@ Module.register('thermometer', {
 	socketNotificationReceived: function (notification, payload) {
 		switch (notification) {
 			case "TEMPERATURE":
-				// this.receiveTemperature(payload);
-				var wrapper = document.getElementById('container');
-				wrapper.innerHTML = JSON.stringify(payload);
+				this.receiveTemperature(payload);
+				// var wrapper = document.getElementById('container');
+				// wrapper.innerHTML = this.createCard('temp', 'temperature', payload.degrees, 'gradi').trim() +
+				// 	this.createCard('energy', 'umidità', payload.humidity, '%').trim();
 				break;
 		}
 	},
@@ -66,7 +67,6 @@ Module.register('thermometer', {
 	// Funzione che ottiene relatime
 	// la nuova temperatura
 	receiveTemperature: function (temperature) {
-		Log.info('Firebase realtime database added: ' + JSON.stringify(value));
 		this.temperature = temperature;
 		// this.updateDom();
 		var wrapper = document.getElementById('container');
