@@ -30,6 +30,7 @@ module.exports = NodeHelper.create({
 
     configureFirebase: function (config) {
         console.log('configuring firebase...');
+        this.sendSocketNotification("TEMPERATURE", "ciao");
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = config;
         this.fetch(config.roomId, this.onFetchTemperature);
