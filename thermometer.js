@@ -41,7 +41,7 @@ Module.register('thermometer', {
 
 	// Define start sequence.
 	start: function () {
-		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+		// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 	},
 
 	socketNotificationReceived: function (notification, payload) {
@@ -64,10 +64,11 @@ Module.register('thermometer', {
 	// },
 
 	loaded: function (callback) {
-		Log.info("loaded");
-		this.finishLoading();
-		Log.log(this.name + ' is loaded!');
-		callback();
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+		// Log.info("loaded");
+		// this.finishLoading();
+		// Log.log(this.name + ' is loaded!');
+		// callback();
 	},
 
 	// Funzione che ottiene relatime
