@@ -14,7 +14,8 @@ module.exports = NodeHelper.create({
     // Subclass start method.
     start: function () {
         console.log('Starting module: ' + this.name + ' from helper');
-        this.loaded = false;
+        // this.loaded = false;
+        this.sendSocketNotification("GET_FIREBASE_CONFIG", "");
     },
 
     startReceiver: function () {

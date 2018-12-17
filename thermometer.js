@@ -48,12 +48,14 @@ Module.register('thermometer', {
 			case "TEMPERATURE":
 				this.receiveTemperature(payload);
 				break;
+			case "GET_FIREBASE_CONFIG":
+				this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+				break;
 		}
 	},
 
 	// Get dom
 	getDom: function () {
-		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
 		wrapper.innerHTML = this.createHTML('0', '0');
@@ -76,14 +78,16 @@ Module.register('thermometer', {
 		degrees.innerHTML = temperature.degrees + '°';
 	},
 
-	createHTML: function (degrees, humidity) {
-		return `<h6>Stanza {{ roomName | safe }}<h6>
-				<dl>
-					<dt>Temperatura</dt>
-					<dd id="degrees" style="font-weight: bold">${degrees}°</dd>
-					<dt>Umidità</dt>
-					<dd id="humidity">${humidity}%</dd>
-				</dl>`;
+	createHTML: function (degrees, humidity, roomName) {
+		return `<h3>Stanza: ${roomName}</h3>
+				<div class="row">
+					<label>Temperatura</label>
+					<label id="degrees" style="font-weight: bold">${degrees}°</label>
+				</div>
+				<div class="row">
+					<label>Umidità</label>
+					<label id="humidity">${humidity}%</label>
+				</div>`;
 	},
 
 	temperature: ""
