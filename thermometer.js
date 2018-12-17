@@ -59,6 +59,7 @@ Module.register('thermometer', {
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
+		wrapper.setAttribute('id', 'main')
 		wrapper.innerHTML = this.createHTML('0', '0', 'sala Sime');
 		return wrapper;
 	},
@@ -73,7 +74,7 @@ Module.register('thermometer', {
 	// Funzione che ottiene relatime
 	// la nuova temperatura
 	receiveTemperature: function (rooms) {
-		var wrapper = document.createElement('div');
+		var wrapper = document.getElementById('main');
 		var cards;
 		for (let index = 0; index < rooms.length; index++) {
 			const room = rooms[index];
