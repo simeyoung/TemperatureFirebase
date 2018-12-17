@@ -55,7 +55,7 @@ module.exports = NodeHelper.create({
 
     getTemperature: function (snapshot, callback) {
         snapshot.forEach(function (childSnapshot) {
-            var numberChild = snapshot.numChildren();
+            var numberChild = childSnapshot.numChildren();
             var obj = {},
                 i = 0;
 
