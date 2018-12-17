@@ -24,6 +24,7 @@ module.exports = NodeHelper.create({
     onFetchTemperature: function (value) {
         console.log('send temperature to module: thermostat');
         console.log('temperature sended: ', value);
+        console.log('this current', this);
         this.sendSocketNotification('TEMPERATURE', value);
     },
 
