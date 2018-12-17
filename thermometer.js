@@ -32,6 +32,7 @@ Module.register('thermometer', {
 	},
 
 	getTemplate: function () {
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		return "thermometer.njk"
 	},
 
@@ -51,16 +52,16 @@ Module.register('thermometer', {
 	},
 
 	// Get dom
-	getDom: function () {
-		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
-		// 	// Crea div aggiungi classe container e card
-		// 	var wrapper = document.createElement('div');
-		// 	wrapper.classList.add('container');
-		// 	wrapper.setAttribute('id', 'container');
-		// 	wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
-		// 		this.createCard('energy', 'umidità', '0', '%').trim();
-		// 	return wrapper;
-	},
+	// getDom: function () {
+	// 	this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+	// 	// 	// Crea div aggiungi classe container e card
+	// 	// 	var wrapper = document.createElement('div');
+	// 	// 	wrapper.classList.add('container');
+	// 	// 	wrapper.setAttribute('id', 'container');
+	// 	// 	wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
+	// 	// 		this.createCard('energy', 'umidità', '0', '%').trim();
+	// 	// 	return wrapper;
+	// },
 
 	loaded: function (callback) {
 		// Log.info("loaded");
