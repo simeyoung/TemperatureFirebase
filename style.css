@@ -16,3 +16,7 @@ h3 {
 .font-bold {
     font-weight: bold;
 }
+
+.col {
+    width: 20%;
+}

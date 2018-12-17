@@ -22,10 +22,10 @@ module.exports = NodeHelper.create({
 
     },
 
-    onFetchTemperature: function (value, self) {
+    onFetchTemperature: function (self) {
         console.log('send temperature to module: thermostat');
-        console.log('temperature sended: ', value);
-        self.sendSocketNotification('TEMPERATURE', value);
+        console.log('temperature sended: ', self.rooms);
+        self.sendSocketNotification('TEMPERATURE', self.rooms);
     },
 
     configureFirebase: function (config) {
@@ -33,33 +33,35 @@ module.exports = NodeHelper.create({
         // this.sendSocketNotification("TEMPERATURE", "ciao");
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = config;
-        this.fetch(config.roomId, this.onFetchTemperature, this);
+        this.fetch(config.roomsId, this.onFetchTemperature, this);
 
         console.log('api key: ' + config.apiKey);
         console.log('Configured firebase!');
     },
 
-    fetch: function (roomId, callback, self) {
+    fetch: function (roomsId, callback, self) {
         this.openFirebaseConnection(this.firebaseConfig);
 
         const database = firebase.database();
-        const roomRef = database.ref('rooms/' + roomId);
-        roomRef.child('name').once('value', function (value) {
-            const roomName = value.val();
-            console.log('room name: ', roomName);
+        for (var i = 0; i < roomsId.length; i++) {
+            const roomRef = database.ref('rooms/' + roomsId[i]);
+            roomRef.child('name').once('value', function (value) {
+                const roomName = value.val();
+                console.log('room name: ', roomName);
 
-            var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
-            recentPostsRef.on('child_added', function (snapshot) {
-                console.log('on child added');
-                self.getTemperature(snapshot, callback, self, roomName);
+                var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
+                recentPostsRef.on('child_added', function (snapshot) {
+                    console.log('on child added');
+                    self.getTemperature(roomsId[i], snapshot, callback, self, roomName);
+                });
             });
-        });
+        }
         // temperatureRef.once('child_changed', callback);
 
         console.log('Configured fetch for firebase..');
     },
 
-    getTemperature: function (snapshot, callback, self, roomName) {
+    getTemperature: function (roomId, snapshot, callback, self, roomName) {
         var numberChild = snapshot.numChildren();
         var obj = {},
             i = 0;
@@ -70,9 +72,10 @@ module.exports = NodeHelper.create({
             var childData = childSnapshot.val();
             obj[childKey] = childData;
             if (i == numberChild) {
-                obj['roomName'] = roomName;
+                obj['name'] = roomName;
+                this.rooms[roomId] = obj;
                 console.log('temperature added', obj);
-                callback(obj, self);
+                callback(self);
             }
         });
     },
@@ -92,7 +95,8 @@ module.exports = NodeHelper.create({
                 this.configureFirebase(payload);
                 break;
         }
-    }
+    },
 
+    rooms: []
 
 });

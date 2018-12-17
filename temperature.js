@@ -29,7 +29,7 @@ function thermometer() {
     };
 
     this.fetch = function (idRoom, callback) {
-        var temperatureRef = firebase.database().ref('rooms/' + idRoom + '/temperatures');
+        // var roomsRef = firebase.database().ref('rooms');
         // return temperatureRef.once('child_changed', callback);
         // temperatureRef.once('value', (snapshot) => {
         //     snapshot.forEach(function (childSnapshot) {
@@ -38,28 +38,56 @@ function thermometer() {
         //         console.log(childData);
         //     });
         // });
-        var ref = firebase.database().ref('rooms/' + idRoom);
-        var roomName = ref.child('name').once('value', function (value) {
-            console.log('room name: ', value.val());
-        });
+        var roomsId = [1, 2];
+        for (var i = 0; i < roomsId.length; i++) {
+            const roomRef = firebase.database().ref('rooms/' + roomsId[i]);
+            roomRef.child('name').once('value', function (value) {
+                const roomName = value.val();
+                console.log('room name: ', roomName);
 
-        var recentPostsRef = temperatureRef.limitToLast(1);
-        recentPostsRef.on('child_added', function (snapshot) {
-            var numberChild = snapshot.numChildren();
-            var obj = {},
-                i = 0;
+                var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
+                recentPostsRef.on('child_added', function (snapshot) {
+                    console.log('on child added');
+                    var numberChild = snapshot.numChildren();
+                    var obj = {},
+                        i = 0;
 
-            snapshot.forEach(function (childSnapshot) {
-                i++;
-                var childKey = childSnapshot.key;
-                var childData = childSnapshot.val();
-                obj[childKey] = childData;
-                if (i == numberChild) {
-                    console.log(obj);
-                    return;
-                }
+                    snapshot.forEach(function (childSnapshot) {
+                        i++;
+                        var childKey = childSnapshot.key;
+                        var childData = childSnapshot.val();
+                        obj[childKey] = childData;
+                        if (i == numberChild) {
+                            obj['name'] = roomName;
+                            console.log('temperature added', obj);
+                        }
+                    });
+                });
             });
-        })
+        }
+
+        // var ref = firebase.database().ref('rooms/' + idRoom);
+        // ref.child('name').once('value', function (value) {
+        //     console.log('room name: ', value.val());
+
+        //     var recentPostsRef = temperatureRef.limitToLast(1);
+        //     recentPostsRef.on('child_added', function (snapshot) {
+        //         var numberChild = snapshot.numChildren();
+        //         var obj = {},
+        //             i = 0;
+
+        //         snapshot.forEach(function (childSnapshot) {
+        //             i++;
+        //             var childKey = childSnapshot.key;
+        //             var childData = childSnapshot.val();
+        //             obj[childKey] = childData;
+        //             if (i == numberChild) {
+        //                 console.log(obj);
+        //                 return;
+        //             }
+        //         });
+        //     });
+        // });
 
     }
 };

@@ -9,7 +9,7 @@
 
 Module.register('thermometer', {
 	defaults: {
-		roomId: 2,
+		roomsId: [1, 2],
 		apiKey: '',
 		authDomain: '',
 		databaseURL: '',
@@ -48,9 +48,9 @@ Module.register('thermometer', {
 			case "TEMPERATURE":
 				this.receiveTemperature(payload);
 				break;
-			// case "GET_FIREBASE_CONFIG":
-			// 	this.sendSocketNotification("FIREBASE_CONFIG", this.config);
-			// 	break;
+				// case "GET_FIREBASE_CONFIG":
+				// 	this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+				// 	break;
 		}
 	},
 
@@ -72,25 +72,30 @@ Module.register('thermometer', {
 
 	// Funzione che ottiene relatime
 	// la nuova temperatura
-	receiveTemperature: function (temperature) {
-		var humidity = document.getElementById('humidity');
-		humidity.innerHTML = temperature.humidity + '%';
-		var degrees = document.getElementById('degrees');
-		degrees.innerHTML = temperature.degrees + '°';
-		var roomName = document.getElementById('roomName');
-		roomName.innerHTML = 'Stanza' + temperature.roomName;
+	receiveTemperature: function (rooms) {
+		var wrapper = document.createElement('div');
+		var cards;
+		for (let index = 0; index < rooms.length; index++) {
+			const room = rooms[index];
+			cards += this.createHTML(room.degrees, room.humidity, room.name);
+		}
+
+		wrapper.innerHTML = this.createHTML('0', '0', 'sala Sime');
 	},
 
 	createHTML: function (degrees, humidity, roomName) {
-		return `<h3 id="roomName">${roomName}</h3>
-				<div class="row">
-					<label class="font-bold">Temperatura</label>
-					<label id="degrees">${degrees}°</label>
-				</div>
-				<div class="row">
-					<label class="font-bold">Umidità</label>
-					<label id="humidity">${humidity}%</label>
-				</div>`;
+		return `
+		<div class="col">
+			<h3 id="roomName">${roomName}</h3>
+			<div class="row">
+				<label class="font-bold">Temperatura</label>
+				<label id="degrees">${degrees}°</label>
+			</div>
+			<div class="row">
+				<label class="font-bold">Umidità</label>
+				<label id="humidity">${humidity}%</label>
+			</div>
+		</div>`;
 	},
 
 	temperature: ""
