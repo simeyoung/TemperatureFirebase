@@ -24,8 +24,8 @@ module.exports = NodeHelper.create({
     onFetchTemperature: function (value, self) {
         console.log('send temperature to module: thermostat');
         console.log('temperature sended: ', value);
-        // self.sendSocketNotification('TEMPERATURE', value);
-        // self.sendNotification('TEMPERATURE', value);
+        self.sendSocketNotification('TEMPERATURE', value);
+        self.sendNotification('TEMPERATURE', value);
     },
 
     configureFirebase: function (config) {
@@ -83,9 +83,9 @@ module.exports = NodeHelper.create({
         switch (notification) {
             case "FIREBASE_CONFIG":
                 console.log('firebase_config payload: ', payload);
-                this.sendSocketNotification("TEMPERATURE", "ciao");
-                console.log('socket notification sended');
-                // this.configureFirebase(payload);
+                // this.sendSocketNotification("TEMPERATURE", "ciao");
+                // console.log('socket notification sended');
+                this.configureFirebase(payload);
                 break;
         }
     }
