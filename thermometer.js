@@ -33,17 +33,6 @@ Module.register('thermometer', {
 		// Log.info('Starting module: ' + this.name + ' from module');
 	},
 
-	notificationReceived: function(notification, payload, sender) { 
-		// Log.info(this.name + ': Received notification: ' + notification);
-		switch (notification) {
-			case "TEMPERATURE":
-				// this.receiveTemperature(payload);
-				var wrapper = document.getElementById('container');
-				wrapper.innerHTML = JSON.stringify(payload);
-				break;
-		}
-	},
-
 	socketNotificationReceived: function (notification, payload) {
 		switch (notification) {
 			case "TEMPERATURE":
