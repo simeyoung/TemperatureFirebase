@@ -43,12 +43,12 @@ module.exports = NodeHelper.create({
         this.openFirebaseConnection(this.firebaseConfig);
 
         const database = firebase.database();
-        const temperatureRef = database.ref('rooms/' + roomId + '/temperatures');
-        temperatureRef.child('name').once('value', function (value) {
+        const roomRef = database.ref('rooms/' + roomId);
+        roomRef.child('name').once('value', function (value) {
             const roomName = value.val();
             console.log('room name: ', roomName);
 
-            var recentPostsRef = temperatureRef.limitToLast(1);
+            var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
             recentPostsRef.on('child_added', function (snapshot) {
                 console.log('on child added');
                 self.getTemperature(snapshot, callback, self, roomName);
