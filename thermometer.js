@@ -27,9 +27,9 @@ Module.register('thermometer', {
 	},
 
 	// Define styles
-	// getStyles: function () {
-	// 	return ['style.css'];
-	// },
+	getStyles: function () {
+		return ['style.css'];
+	},
 
 	// getTemplate: function () {
 	// 	// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
@@ -59,7 +59,7 @@ Module.register('thermometer', {
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
-		wrapper.innerHTML = this.createHTML('0', '0');
+		wrapper.innerHTML = this.createHTML('0', '0', 'sala Sime');
 		return wrapper;
 	},
 
@@ -77,16 +77,18 @@ Module.register('thermometer', {
 		humidity.innerHTML = temperature.humidity + '%';
 		var degrees = document.getElementById('degrees');
 		degrees.innerHTML = temperature.degrees + '°';
+		var roomName = document.getElementById('roomName');
+		roomName.innerHTML = temperature.roomName;
 	},
 
 	createHTML: function (degrees, humidity, roomName) {
-		return `<h3>Stanza: ${roomName}</h3>
+		return `<h3 id="roomName">Stanza: ${roomName}</h3>
 				<div class="row">
-					<label>Temperatura</label>
-					<label id="degrees" style="font-weight: bold">${degrees}°</label>
+					<label class="font-bold">Temperatura</label>
+					<label id="degrees">${degrees}°</label>
 				</div>
 				<div class="row">
-					<label>Umidità</label>
+					<label class="font-bold">Umidità</label>
 					<label id="humidity">${humidity}%</label>
 				</div>`;
 	},

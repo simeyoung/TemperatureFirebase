@@ -38,6 +38,10 @@ function thermometer() {
         //         console.log(childData);
         //     });
         // });
+        var ref = firebase.database().ref('rooms/' + idRoom);
+        var roomName = ref.child('name').once('value', function (value) {
+            console.log('room name: ', value.val());
+        });
 
         var recentPostsRef = temperatureRef.limitToLast(1);
         recentPostsRef.on('child_added', function (snapshot) {

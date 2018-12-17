@@ -44,18 +44,22 @@ module.exports = NodeHelper.create({
 
         const database = firebase.database();
         const temperatureRef = database.ref('rooms/' + roomId + '/temperatures');
-        // temperatureRef.once('child_changed', callback);
+        temperatureRef.child('name').once('value', function (value) {
+            const roomName = value.val();
+            console.log('room name: ', roomName);
 
-        var recentPostsRef = temperatureRef.limitToLast(1);
-        recentPostsRef.on('child_added', function (snapshot) {
-            console.log('on child added');
-            self.getTemperature(snapshot, callback, self);
+            var recentPostsRef = temperatureRef.limitToLast(1);
+            recentPostsRef.on('child_added', function (snapshot) {
+                console.log('on child added');
+                self.getTemperature(snapshot, callback, self, roomName);
+            });
         });
+        // temperatureRef.once('child_changed', callback);
 
         console.log('Configured fetch for firebase..');
     },
 
-    getTemperature: function (snapshot, callback, self) {
+    getTemperature: function (snapshot, callback, self, roomName) {
         var numberChild = snapshot.numChildren();
         var obj = {},
             i = 0;
@@ -66,6 +70,7 @@ module.exports = NodeHelper.create({
             var childData = childSnapshot.val();
             obj[childKey] = childData;
             if (i == numberChild) {
+                obj['roomName'] = roomName;
                 console.log('temperature added', obj);
                 callback(obj, self);
             }
