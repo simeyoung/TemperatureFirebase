@@ -23,7 +23,7 @@ module.exports = NodeHelper.create({
 
     onFetchTemperature: function (value) {
         Log.info('send temperature to module:' + JSON.parse(value));
-        this.sendSocketNotification("TEMPERATURE", value);
+        this.sendSocketNotification('TEMPERATURE', value);
     },
 
     configureFirebase: function (config) {
@@ -31,16 +31,7 @@ module.exports = NodeHelper.create({
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         // this.firebaseConfig = config.firebaseConfig;
 
-        var i = 0;
-        var sefl = this;
-        while (true) {
-            setTimeout(function() {
-                sefl.sendSocketNotification("TEMPERATURE", i);
-                i++;
-            }, 3000)
-        }
-
-        // this.fetch(config.roomId, this.onFetchTemperature);
+        this.fetch(config.roomId, this.onFetchTemperature);
 
         Log.info('api key: ' + config.apiKey);
         Log.info('Configured firebase!');

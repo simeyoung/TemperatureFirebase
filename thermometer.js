@@ -36,49 +36,27 @@ Module.register('thermometer', {
 	socketNotificationReceived: function (notification, payload) {
 		console.log(this.name + ': Received socketnotification: ' + notification);
 
-		// switch (notification) {
-		// 	case 'TEMPERATURE':
-		// 		this.receiveTemperature(payload)
-		// 		break;
-		// }
+		switch (notification) {
+			case 'TEMPERATURE':
+				this.receiveTemperature(payload);
+				break;
+		}
 	},
 
 	// Get dom
 	getDom: function () {
 		// Crea div aggiungi classe container e card
 		var wrapper = document.createElement('div');
-		wrapper.innerHTML = JSON.stringify(this.temperature);
 		// wrapper.classList.add('container');
+		wrapper.id = 'container';
+		wrapper.innerHTML = JSON.stringify(this.temperature);
 		// wrapper.innerHTML = this.createCard('temp', 'temperature', this.temperature.degrees, 'gradi').trim() +
 		// 	this.createCard('energy', 'umidità', this.temperature.humidity, '%').trim();
 		return wrapper;
 	},
 
 	loaded: function (callback) {
-
-		// var i = 0;
-		// var sefl = this;
-		// for (var k = 0; k < 9999; k++) {
-		// 	setInterval(function() {
-		// 	  this.temperature = i++;
-		// 	  this.updateDom();
-		// 	}, 3000);
-		// }
-
-		this.temperature = "puppa";
-		Log.info("ciao");
-		this.updateDom(100);
-
-
 		Log.info("loaded");
-
-		setInterval(function () {
-			this.temperature = "puppa da interval";
-			Log.info("ciao da interval");
-			this.updateDom(10000);
-		}, 5000);
-
-
 
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		this.finishLoading();
@@ -91,7 +69,9 @@ Module.register('thermometer', {
 	receiveTemperature: function (temperature) {
 		Log.info('Firebase realtime database added: ' + JSON.stringify(value));
 		this.temperature = temperature;
-		this.updateDom();
+		// this.updateDom();
+		var wrapper = document.getElementById('container');
+		wrapper.innerHTML = JSON.stringify(this.temperature);
 	},
 
 	createCard: function (clss, txt, num, measure) {
