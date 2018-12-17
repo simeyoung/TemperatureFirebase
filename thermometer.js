@@ -40,9 +40,7 @@ Module.register('thermometer', {
 	},
 
 	// Define start sequence.
-	start: function () {
-		// this.sendSocketNotification("FIREBASE_CONFIG", this.config);
-	},
+	start: function () {},
 
 	socketNotificationReceived: function (notification, payload) {
 		switch (notification) {
@@ -53,18 +51,18 @@ Module.register('thermometer', {
 	},
 
 	// Get dom
-	// getDom: function () {
-	// 	// Crea div aggiungi classe container e card
-	// 	var wrapper = document.createElement('div');
-	// 	wrapper.classList.add('container');
-	// 	wrapper.setAttribute('id', 'container');
-	// 	wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
-	// 		this.createCard('energy', 'umidità', '0', '%').trim();
-	// 	return wrapper;
-	// },
+	getDom: function () {
+		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+		// 	// Crea div aggiungi classe container e card
+		// 	var wrapper = document.createElement('div');
+		// 	wrapper.classList.add('container');
+		// 	wrapper.setAttribute('id', 'container');
+		// 	wrapper.innerHTML = this.createCard('temp', 'temperature', '0', 'gradi').trim() +
+		// 		this.createCard('energy', 'umidità', '0', '%').trim();
+		// 	return wrapper;
+	},
 
 	loaded: function (callback) {
-		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 		// Log.info("loaded");
 		// this.finishLoading();
 		// Log.log(this.name + ' is loaded!');
