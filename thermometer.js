@@ -34,7 +34,7 @@ Module.register('thermometer', {
 	},
 
 	socketNotificationReceived: function (notification, payload) {
-		console.log(this.name + ': Received socketnotification: ' + notification);
+		Log.info(this.name + ': Received socketnotification: ' + notification);
 
 		switch (notification) {
 			case 'TEMPERATURE':
@@ -72,7 +72,7 @@ Module.register('thermometer', {
 		this.temperature = temperature;
 		// this.updateDom();
 		var wrapper = document.getElementById('container');
-		wrapper.innerHTML = JSON.stringify(this.temperature);
+		wrapper.innerHTML = JSON.stringify(temperature);
 	},
 
 	createCard: function (clss, txt, num, measure) {
