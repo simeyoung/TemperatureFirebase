@@ -22,7 +22,8 @@ module.exports = NodeHelper.create({
     },
 
     onFetchTemperature: function (value) {
-        console.log('send temperature to module:' + this.name);
+        console.log('send temperature to module: thermostat');
+        console.log('temperature sended: ', value);
         this.sendSocketNotification('TEMPERATURE', value);
     },
 
@@ -48,7 +49,7 @@ module.exports = NodeHelper.create({
         recentPostsRef.on('child_added', function (snapshot) {
             console.log('on child added');
             self.getTemperature(snapshot, callback);
-        })
+        });
 
         console.log('Configured fetch for firebase..');
     },
