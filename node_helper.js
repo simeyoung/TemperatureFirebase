@@ -45,13 +45,13 @@ module.exports = NodeHelper.create({
         const database = firebase.database();
         for (var i = 0; i < roomsId.length; i++) {
             const roomRef = database.ref('rooms/' + roomsId[i]);
-            roomRef.child('name').once('value', value => this.getRoom(value, roomsId[i]));
+            roomRef.child('name').once('value', value => self.getRoom(value, roomsId[i], callback));
         }
 
         console.log('Configured fetch for firebase..');
     },
 
-    getRoom: function (value, roomId) {
+    getRoom: function (value, roomId, callback) {
         const roomName = value.val();
         console.log('room name: ', value);
 
