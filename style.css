@@ -1,19 +1,20 @@
 h1,
 h2,
 h3 {
-    font-family: Lato;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 15px;
+    font-size: 20px;
+    text-align: left !important;
 }
 
 .row {
     width: 100%;
-    margin-top: 5px;
+    margin-top: 0px;
     margin-bottom: 5px;
-    font-family: Lato;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
     display: table;
-    font-size: 10px;
+    font-size: 15px;
     text-align: left !important;
     line-height: 1px;
 }

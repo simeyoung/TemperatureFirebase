@@ -89,11 +89,11 @@ Module.register('thermometer', {
 		<div class="col">
 			<h3 id="roomName">${roomName}</h3>
 			<div class="row">
-				<label class="font-bold">Temperatura</label>
+				<label>🌡️</label>
 				<label id="degrees">${degrees}°</label>
 			</div>
 			<div class="row">
-				<label class="font-bold">Umidità</label>
+				<label>💧</label>
 				<label id="humidity">${humidity}%</label>
 			</div>
 		</div>`;
