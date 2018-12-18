@@ -33,36 +33,36 @@ module.exports = NodeHelper.create({
         // this.sendSocketNotification("TEMPERATURE", "ciao");
         // See https://firebase.google.com/docs/web/setup#project_setup for setup
         this.firebaseConfig = config;
-        this.fetch(config.roomsId, this.onFetchTemperature, this);
+        this.fetch(config.roomsId, this);
 
         console.log('api key: ' + config.apiKey);
         console.log('Configured firebase!');
     },
 
-    fetch: function (roomsId, callback, self) {
+    fetch: function (roomsId, self) {
         this.openFirebaseConnection(this.firebaseConfig);
 
         const database = firebase.database();
         for (var i = 0; i < roomsId.length; i++) {
             const roomRef = database.ref('rooms/' + roomsId[i]);
-            roomRef.child('name').once('value', value => self.getRoom(value, roomsId[i], callback));
+            roomRef.child('name').once('value', value => self.getRoom(value, roomsId[i], self));
         }
 
         console.log('Configured fetch for firebase..');
     },
 
-    getRoom: function (value, roomId, callback) {
+    getRoom: function (value, roomId, self) {
         const roomName = value.val();
         console.log('room name: ', value);
 
         var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
         recentPostsRef.on('child_added', function (snapshot) {
             console.log('on child added');
-            self.getTemperature(roomId, snapshot, callback, self, roomName);
+            self.getTemperature(roomId, snapshot, self, roomName);
         });
     },
 
-    getTemperature: function (roomId, snapshot, callback, self, roomName) {
+    getTemperature: function (roomId, snapshot, self, roomName) {
         var numberChild = snapshot.numChildren();
         var obj = {},
             i = 0;
@@ -78,7 +78,7 @@ module.exports = NodeHelper.create({
                 obj['name'] = roomName;
                 self.rooms[roomId] = obj;
                 console.log('temperature added', obj);
-                callback(self);
+                self.onFetchTemperature(self);
             }
         });
     },
