@@ -44,8 +44,10 @@ module.exports = NodeHelper.create({
 
         const database = firebase.database();
         for (var i = 0; i < roomsId.length; i++) {
-            const roomRef = database.ref('rooms/' + roomsId[i]);
-            roomRef.child('name').once('value', value => self.getRoom(value, roomsId[i], roomRef, self));
+            const roomId = roomsId[i];
+            const roomRef = database.ref('rooms/' + roomId);
+            roomRef.child('name').once('value', value => self.getRoom(value, roomId, roomRef, self));
+            console.log('room id from fetch: ', roomId);
         }
 
         console.log('Configured fetch for firebase..');
@@ -65,7 +67,7 @@ module.exports = NodeHelper.create({
             i = 0;
 
         console.log('on child added');
-        console.log('room id: ', roomId);
+        console.log('room id from getTemperature: ', roomId);
 
         snapshot.forEach(function (childSnapshot) {
             i++;
