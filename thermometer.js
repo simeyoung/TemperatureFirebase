@@ -28,7 +28,7 @@ Module.register('thermometer', {
 
 	// Define styles
 	getStyles: function () {
-		return ['style.css'];
+		return ['style.css', 'fontawesome.min.css'];
 	},
 
 	// getTemplate: function () {
