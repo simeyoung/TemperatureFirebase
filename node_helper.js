@@ -74,7 +74,7 @@ module.exports = NodeHelper.create({
             obj[childKey] = childData;
             if (i == numberChild) {
                 obj['name'] = roomName;
-                self.rooms[roomId] = obj;
+                self.rooms.splice(roomId - 1, 1, obj);
                 console.log('temperature added', obj);
                 self.onFetchTemperature(self);
             }
@@ -98,6 +98,6 @@ module.exports = NodeHelper.create({
         }
     },
 
-    rooms: []
+    rooms: [ ]
 
 });
