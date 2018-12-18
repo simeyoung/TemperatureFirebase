@@ -56,10 +56,7 @@ module.exports = NodeHelper.create({
         console.log('room name: ', roomName);
 
         var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
-        recentPostsRef.on('child_added', function (snapshot) {
-            console.log('on child added');
-            self.getTemperature(roomId, snapshot, self, roomName);
-        });
+        recentPostsRef.on('child_added', snapshot => self.getTemperature(roomId, snapshot, self, roomName));
     },
 
     getTemperature: function (roomId, snapshot, self, roomName) {
@@ -67,6 +64,7 @@ module.exports = NodeHelper.create({
         var obj = {},
             i = 0;
 
+        console.log('on child added');
         console.log('room id: ', roomId);
 
         snapshot.forEach(function (childSnapshot) {
