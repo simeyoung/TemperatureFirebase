@@ -47,7 +47,8 @@ module.exports = NodeHelper.create({
             const roomRef = database.ref('rooms/' + roomsId[i]);
             roomRef.child('name').once('value', function (value) {
                 // const roomName = value.val();
-                console.log('room name: ', value);
+                // console.log('room name: ', value);
+                const roomName = "sime";
 
                 var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
                 recentPostsRef.on('child_added', function (snapshot) {
