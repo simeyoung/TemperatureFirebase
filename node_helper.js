@@ -74,7 +74,7 @@ module.exports = NodeHelper.create({
             obj[childKey] = childData;
             if (i == numberChild) {
                 obj['name'] = roomName;
-                this.rooms[roomId] = obj;
+                self.rooms[roomId] = obj;
                 console.log('temperature added', obj);
                 callback(self);
             }
