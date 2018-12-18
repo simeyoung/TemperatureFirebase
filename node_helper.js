@@ -46,9 +46,8 @@ module.exports = NodeHelper.create({
         for (var i = 0; i < roomsId.length; i++) {
             const roomRef = database.ref('rooms/' + roomsId[i]);
             roomRef.child('name').once('value', function (value) {
-                // const roomName = value.val();
-                // console.log('room name: ', value);
-                const roomName = "sime";
+                const roomName = value.val();
+                console.log('room name: ', value);
 
                 var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
                 recentPostsRef.on('child_added', function (snapshot) {
@@ -66,6 +65,8 @@ module.exports = NodeHelper.create({
         var numberChild = snapshot.numChildren();
         var obj = {},
             i = 0;
+
+        console.log('room id: ', roomId);
 
         snapshot.forEach(function (childSnapshot) {
             i++;
