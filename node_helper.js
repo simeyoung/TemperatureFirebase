@@ -18,9 +18,7 @@ module.exports = NodeHelper.create({
         // this.sendSocketNotification("GET_FIREBASE_CONFIG", "");
     },
 
-    startReceiver: function () {
-
-    },
+    startReceiver: function () { },
 
     onFetchTemperature: function (self) {
         console.log('send temperature to module: thermostat');
@@ -67,9 +65,9 @@ module.exports = NodeHelper.create({
             i = 0;
 
         console.log('on child added');
-        console.log('room id from getTemperature: ', roomId);
 
         snapshot.forEach(function (childSnapshot) {
+            console.log('room id from getTemperature: ', roomId);
             i++;
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
