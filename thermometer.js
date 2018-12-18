@@ -22,7 +22,8 @@ Module.register('thermometer', {
 	// Define scripts
 	getScripts: function () {
 		return [
-			this.file('node_modules/firebase/firebase.js')
+			this.file('node_modules/firebase/firebase.js'),
+			'moment.js'
 		];
 	},
 
@@ -92,7 +93,8 @@ Module.register('thermometer', {
 		var cards;
 		for (let index = 0; index < rooms.length; index++) {
 			const room = rooms[index];
-			cards += this.createHTML(room.degrees, room.humidity, room.name, room.currentDate);
+			const currentDate = moment(room.currentDate).format('dd/MM/YY HH:mm');
+			cards += this.createHTML(room.degrees, room.humidity, room.name, currentDate);
 
 			if (index + 1 < rooms.length) {
 				cards += '<hr>';
