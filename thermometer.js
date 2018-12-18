@@ -93,11 +93,11 @@ Module.register('thermometer', {
 		<div class="col">
 			<h3 id="roomName">${roomName}</h3>
 			<div class="row">
-				<i class="fas fa-temperature-high"></i>
+				<i class="fa fa-temperature-high"></i>
 				<label id="degrees"> ${degrees}°</label>
 			</div>
 			<div class="row">
-				<i class="fas fa-tint"></i>
+				<i class="fa fa-tint"></i>
 				<label id="humidity"> ${humidity}%</label>
 			</div>
 		</div>`;
