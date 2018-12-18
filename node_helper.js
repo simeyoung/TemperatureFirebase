@@ -45,15 +45,15 @@ module.exports = NodeHelper.create({
         const database = firebase.database();
         for (var i = 0; i < roomsId.length; i++) {
             const roomRef = database.ref('rooms/' + roomsId[i]);
-            roomRef.child('name').once('value', value => self.getRoom(value, roomsId[i], self));
+            roomRef.child('name').once('value', value => self.getRoom(value, roomsId[i], roomRef, self));
         }
 
         console.log('Configured fetch for firebase..');
     },
 
-    getRoom: function (value, roomId, self) {
+    getRoom: function (value, roomId, roomRef, self) {
         const roomName = value.val();
-        console.log('room name: ', value);
+        console.log('room name: ', roomName);
 
         var recentPostsRef = roomRef.child('temperatures').limitToLast(1);
         recentPostsRef.on('child_added', function (snapshot) {
