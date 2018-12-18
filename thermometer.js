@@ -79,6 +79,10 @@ Module.register('thermometer', {
 		for (let index = 0; index < rooms.length; index++) {
 			const room = rooms[index];
 			cards += this.createHTML(room.degrees, room.humidity, room.name);
+
+			if (index + 1 < rooms.length) {
+				cards += '<hr>';
+			}
 		}
 
 		wrapper.innerHTML = cards;
@@ -89,11 +93,11 @@ Module.register('thermometer', {
 		<div class="col">
 			<h3 id="roomName">${roomName}</h3>
 			<div class="row">
-				<label>🌡️</label>
+				<label>&#127777;&#65039;</label>
 				<label id="degrees">${degrees}°</label>
 			</div>
 			<div class="row">
-				<label>💧</label>
+				<label>&#128167;</label>
 				<label id="humidity">${humidity}%</label>
 			</div>
 		</div>`;
