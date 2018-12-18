@@ -31,12 +31,12 @@ h3 {
 hr {
     border: none;
     border-left: 1px solid hsla(200, 10%, 50%, 100);
-    height: 60px;
+    height: 80px;
     width: 1px;
     float: left;
     margin-right: 5px;
     margin-left: -15px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .emoji.temperature::before {
@@ -49,4 +49,8 @@ hr {
 
 .degrees, .humidity, .clock {
     margin-left: 5px;
+}
+
+.clock {
+    font-size: 12px;
 }

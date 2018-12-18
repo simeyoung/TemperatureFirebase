@@ -93,7 +93,7 @@ Module.register('thermometer', {
 		var cards;
 		for (let index = 0; index < rooms.length; index++) {
 			const room = rooms[index];
-			const currentDate = moment(room.currentDate).format('dd/MM/YY HH:mm');
+			const currentDate = moment(room.currentDate).format('DD/MM/YY HH:mm');
 			cards += this.createHTML(room.degrees, room.humidity, room.name, currentDate);
 
 			if (index + 1 < rooms.length) {
@@ -118,7 +118,7 @@ Module.register('thermometer', {
 			</div>
 			<div class="row">
 				<i class="fa fa-clock"></i>
-				<label class="clock">${currentDate}%</label>
+				<label class="clock">${currentDate}</label>
 			</div>
 		</div>`;
 	},
