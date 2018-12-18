@@ -57,11 +57,24 @@ Module.register('thermometer', {
 	// Get dom
 	getDom: function () {
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
+
+		var body = document.createElement('div');
 		// Crea div aggiungi classe container e card
+		var linkcss = document.createElement('link');
+		// <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"></link>
+		linkcss.setAttribute('rel', 'stylesheet');
+		linkcss.setAttribute('href', 'https://use.fontawesome.com/releases/v5.6.1/css/all.css');
+		linkcss.setAttribute('integrity', 'sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP');
+		linkcss.setAttribute('crossorigin', 'anonymous');
+
 		var wrapper = document.createElement('div');
 		wrapper.setAttribute('id', 'main')
 		wrapper.innerHTML = this.createHTML('0', '0', 'sala Sime');
-		return wrapper;
+
+		body.append(linkcss);
+		body.append(wrapper);
+
+		return body;
 	},
 
 	loaded: function (callback) {
