@@ -8,6 +8,7 @@
 
 var NodeHelper = require("node_helper");
 const firebase = require('firebase');
+const moment = require('moment');
 
 module.exports = NodeHelper.create({
 
@@ -74,6 +75,7 @@ module.exports = NodeHelper.create({
             obj[childKey] = childData;
             if (i == numberChild) {
                 obj['name'] = roomName;
+                obj['currentDate'] = moment(obj['currentDate']).format('dd/MM/YY HH:mm');
                 self.rooms.splice(roomId - 1, 1, obj);
                 console.log('temperature added', obj);
                 self.onFetchTemperature(self);

@@ -28,7 +28,7 @@ Module.register('thermometer', {
 
 	// Define styles
 	getStyles: function () {
-		return ['style.css', 'fontawesome.min.css'];
+		return ['style.css'];
 	},
 
 	// getTemplate: function () {
@@ -59,6 +59,7 @@ Module.register('thermometer', {
 		this.sendSocketNotification("FIREBASE_CONFIG", this.config);
 
 		var body = document.createElement('div');
+
 		// Crea div aggiungi classe container e card
 		var linkcss = document.createElement('link');
 		// <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"></link>
@@ -91,7 +92,7 @@ Module.register('thermometer', {
 		var cards;
 		for (let index = 0; index < rooms.length; index++) {
 			const room = rooms[index];
-			cards += this.createHTML(room.degrees, room.humidity, room.name);
+			cards += this.createHTML(room.degrees, room.humidity, room.name, room.currentDate);
 
 			if (index + 1 < rooms.length) {
 				cards += '<hr>';
@@ -101,17 +102,21 @@ Module.register('thermometer', {
 		wrapper.innerHTML = cards;
 	},
 
-	createHTML: function (degrees, humidity, roomName) {
+	createHTML: function (degrees, humidity, roomName, currentDate) {
 		return `
 		<div class="col">
 			<h3 id="roomName">${roomName}</h3>
 			<div class="row">
 				<i class="fa fa-temperature-high"></i>
-				<label id="degrees"> ${degrees}°</label>
+				<label class="degrees">${degrees}°</label>
 			</div>
 			<div class="row">
 				<i class="fa fa-tint"></i>
-				<label id="humidity"> ${humidity}%</label>
+				<label class="humidity">${humidity}%</label>
+			</div>
+			<div class="row">
+				<i class="fa fa-clock"></i>
+				<label class="clock">${currentDate}%</label>
 			</div>
 		</div>`;
 	},

@@ -46,3 +46,7 @@ hr {
 .emoji.humidity::before {
     content: "\01F4A7";
 }
+
+.degrees, .humidity, .clock {
+    margin-left: 5px;
+}
